@@ -169,3 +169,4 @@ func (list *DoubleList) Reverse() {
 }
 
 // https://studygolang.com/articles/18042?fr=sidebar
+// https://my.oschina.net/90design/blog/1813377
