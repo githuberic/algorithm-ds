@@ -44,6 +44,7 @@ func (this *SingleLinkedList) InsertAfter(p *Node, v interface{}) bool {
 		return false
 	}
 	newNode := NewListNode(v)
+
 	oldNext := p.next
 	p.next = newNode
 	newNode.next = oldNext
@@ -56,6 +57,7 @@ func (this *SingleLinkedList) InsertBefore(p *Node, v interface{}) bool {
 	if nil == p || p == this.head {
 		return false
 	}
+
 	cur := this.head.next
 	pre := this.head
 	for nil != cur {
@@ -65,9 +67,11 @@ func (this *SingleLinkedList) InsertBefore(p *Node, v interface{}) bool {
 		pre = cur
 		cur = cur.next
 	}
+
 	if nil == cur {
 		return false
 	}
+
 	newNode := NewListNode(v)
 	pre.next = newNode
 	newNode.next = cur
@@ -94,6 +98,7 @@ func (this *SingleLinkedList) FindByIndex(index uint) *Node {
 	if index >= this.length {
 		return nil
 	}
+
 	cur := this.head.next
 	var i uint = 0
 	for ; i < index; i++ {
@@ -107,6 +112,7 @@ func (this *SingleLinkedList) DeleteNode(p *Node) bool {
 	if nil == p {
 		return false
 	}
+
 	cur := this.head.next
 	pre := this.head
 	for nil != cur {
@@ -116,9 +122,11 @@ func (this *SingleLinkedList) DeleteNode(p *Node) bool {
 		pre = cur
 		cur = cur.next
 	}
+
 	if nil == cur {
 		return false
 	}
+
 	pre.next = p.next
 	p = nil
 	this.length--
