@@ -1,8 +1,8 @@
 package example
 
 import (
-	"fmt"
 	"algorithm-ds/go_ds/stack"
+	"fmt"
 )
 
 type Browser struct {

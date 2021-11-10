@@ -6,7 +6,7 @@ import (
 )
 
 type Array struct {
-	data   []int
+	data   []interface{}
 	length uint
 }
 
@@ -15,62 +15,66 @@ func NewArray(capacity int) *Array {
 		return nil
 	}
 	return &Array{
-		data:   make([]int, capacity, capacity),
+		data:   make([]interface{}, capacity, capacity),
 		length: 0,
 	}
 }
 
-func (p *Array) Len() uint {
-	return p.length
+func (this *Array) Len() uint {
+	return this.length
 }
 
 //判断索引是否越界
-func (p *Array) isIndexOutOfRange(index uint) bool {
-	if index >= uint(cap(p.data)) {
+func (this *Array) isIndexOutOfRange(index uint) bool {
+	if index >= uint(cap(this.data)) {
 		return true
 	}
 	return false
 }
 
-func (p *Array) Find(index uint) (int, error) {
-	if p.isIndexOutOfRange(index) {
+func (this *Array) Find(index uint) (interface{}, error) {
+	if this.isIndexOutOfRange(index) {
 		return 0, errors.New("out of range index")
 	}
-	return p.data[index], nil
+	return this.data[index], nil
 }
 
-func (p *Array) Insert(index uint, v int) error {
-	if p.Len() == uint(cap(p.data)) {
+/**
+1: index 插入的位置
+2：v插入的值
+*/
+func (this *Array) Insert(index uint, v int) error {
+	if this.Len() == uint(cap(this.data)) {
 		return errors.New("out of range index")
 	}
 
-	if index != p.Len() && p.isIndexOutOfRange(index) {
+	if index != this.Len() && this.isIndexOutOfRange(index) {
 		return errors.New("out of range index")
 	}
 
-	for l := p.Len(); l > index; l-- {
-		p.data[l] = p.data[l-1]
+	for l := this.Len(); l > index; l-- {
+		this.data[l] = this.data[l-1]
 	}
-	p.data[index] = v
-	p.length++
+	this.data[index] = v
+	this.length++
 
 	return nil
 }
 
-func (p *Array) InsertToTail(v int) error {
-	return p.Insert(p.Len(), v)
+func (this *Array) InsertToTail(v int) error {
+	return this.Insert(this.Len(), v)
 }
 
-func (p *Array) Delete(index uint) (int, error) {
-	if p.isIndexOutOfRange(index) {
+func (this *Array) Delete(index uint) (interface{}, error) {
+	if this.isIndexOutOfRange(index) {
 		return 0, errors.New("out of range index")
 	}
 
-	v := p.data[index]
-	for l := index; l < p.Len()-1; l++ {
-		p.data[l] = p.data[l+1]
+	v := this.data[index]
+	for l := index; l < this.Len()-1; l++ {
+		this.data[l] = this.data[l+1]
 	}
-	p.length--
+	this.length--
 	return v, nil
 }
 
