@@ -56,5 +56,4 @@ func BucketSortSimple(source []int)  {
 		}
 	}
 	copy(source,c)
-
 }

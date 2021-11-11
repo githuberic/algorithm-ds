@@ -12,6 +12,7 @@ func NewHeap(capacity int) *Heap {
 	heap.n = capacity
 	heap.a = make([]int, capacity+1)
 	heap.count = 0
+
 	return heap
 }
 
