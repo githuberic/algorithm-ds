@@ -2,6 +2,7 @@ package temp
 
 import (
 	"fmt"
+	"math"
 )
 
 // 判断一棵二叉树是不是满二叉树(树的节点层数h不超过16层)
@@ -18,33 +19,60 @@ func maxDepth(root *Node) int {
 	}
 	lhight := maxDepth(root.left)
 	rhight := maxDepth(root.right)
-	return max(lhight, rhight)
-}
-
-func max(a, b int) int {
-	if a > b {
-		return a + 1
+	if lhight > rhight {
+		return lhight + 1
+	} else {
+		return rhight + 1
 	}
-	return b + 1
 }
 
-//判断
+/**
+是否平衡二叉树
+*/
+func isBalanced(root *Node) bool {
+	if root == nil {
+		return true
+	}
+
+	lde := maxDepth(root.left)
+	rde := maxDepth(root.right)
+	flag := false
+	if math.Abs(float64(lde-rde)) <= 1 {
+		flag = true
+	}
+	return flag && isBalanced(root.left) && isBalanced(root.right)
+}
+
+/**
+满二叉树
+*/
 func isFull(root *Node) bool {
 	if root == nil {
 		return true
 	}
 	lheight := maxDepth(root.left)
 	rheight := maxDepth(root.right)
-	fmt.Println("l:", lheight, "r:", rheight)
 	return isFull(root.left) && isFull(root.right) && (lheight == rheight)
+}
 
+/**
+完全二叉树
+*/
+func isCompleted(root *Node) bool {
+	if root == nil {
+		return true
+	}
+
+	lheight := maxDepth(root.left)
+	rheight := maxDepth(root.right)
 	//完全二叉树
-	//if math.Abs(float64(Height(root.left)-Height(root.right))) ==1  {
-	//  flag = true
-	//} else {
-	//  flag = false
-	//}
-	//return flag && isFull(root.left) && isFull(root.right)
+	flag := false
+	if math.Abs(float64(lheight-rheight)) == 1 {
+		flag = true
+	} else {
+		flag = false
+	}
+	return flag && isFull(root.left) && isFull(root.right)
 }
 
 // 中序遍历 左 -> 中 -> 右。
