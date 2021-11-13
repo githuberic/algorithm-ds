@@ -5,22 +5,23 @@ import (
 	"testing"
 )
 
-//二叉树深度
-func Height(root *Node) int {
+/**
+满二叉树
+*/
+func isFull(root *Node) bool {
 	if root == nil {
-		return 0
+		return true
 	}
 
 	lHeight := Height(root.left)
 	rHeight := Height(root.right)
-	if lHeight > rHeight {
-		return lHeight + 1
-	} else {
-		return rHeight + 1
-	}
+	return isFull(root.left) && isFull(root.right) && (lHeight == rHeight)
 }
 
-func TestDepth(t *testing.T) {
+/**
+验证是否满二叉树
+*/
+func TestFull(t *testing.T) {
 	//root := &Node{1, nil, nil}
 	root := NewNode(1)
 	n1 := NewNode(2)
@@ -32,5 +33,8 @@ func TestDepth(t *testing.T) {
 	n1.left = n3
 	n1.right = n4
 
-	fmt.Println(Height(root))
+	n2.left = NewNode(31)
+	n2.right = NewNode(32)
+
+	fmt.Println(isFull(root))
 }
