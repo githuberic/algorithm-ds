@@ -15,3 +15,4 @@ func NewNode(data interface{}) *Node {
 func (this *Node) String() string {
 	return fmt.Sprintf("v:%+v, left:%+v, right:%+v", this.data, this.left, this.right)
 }
+
