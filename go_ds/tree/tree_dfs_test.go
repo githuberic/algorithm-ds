@@ -55,3 +55,5 @@ func TestDFS(t *testing.T) {
 	values := DFS(root)
 	fmt.Printf("DFS Order Value %v\n", values)
 }
+
+// https://studygolang.com/articles/16314
