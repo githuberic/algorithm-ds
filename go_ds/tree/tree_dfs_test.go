@@ -18,18 +18,18 @@ func (tree *Node) DFS() []interface{} {
 	s.Push(tree)
 	for !s.Empty() {
 		cur := s.Pop().(*Node)
-		if cur.left != nil {
-			s.Push(cur.left)
+		if cur.Left != nil {
+			s.Push(cur.Left)
 		}
-		if cur.right != nil {
-			s.Push(cur.right)
+		if cur.Right != nil {
+			s.Push(cur.Right)
 		}
 		reS.Push(cur)
 	}
 
 	var res []interface{}
 	for !reS.Empty() {
-		res = append(res, reS.Pop().(*Node).data)
+		res = append(res, reS.Pop().(*Node).Val)
 	}
 
 	return res
@@ -44,13 +44,13 @@ func TestDFS(t *testing.T) {
 	n2 := NewNode(3)
 	n3 := NewNode(4)
 	n4 := NewNode(5)
-	root.left = n1
-	root.right = n2
-	n1.left = n3
-	n1.right = n4
+	root.Left = n1
+	root.Right = n2
+	n1.Left = n3
+	n1.Right = n4
 
-	n3.left = NewNode(41)
-	n3.right = NewNode(42)
+	n3.Left = NewNode(41)
+	n3.Right = NewNode(42)
 
 	values := root.DFS()
 	fmt.Printf("DFS Order Value %v\n", values)

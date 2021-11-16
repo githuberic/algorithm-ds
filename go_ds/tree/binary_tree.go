@@ -17,11 +17,11 @@ func (this *BinaryTree) InOrderTraverse() {
 	for !s.IsEmpty() || nil != p {
 		if nil != p {
 			s.Push(p)
-			p = p.left
+			p = p.Left
 		} else {
 			tmp := s.Pop().(*Node)
-			fmt.Printf("%+v ", tmp.data)
-			p = tmp.right
+			fmt.Printf("%+v ", tmp.Val)
+			p = tmp.Right
 		}
 	}
 }
@@ -32,11 +32,11 @@ func (this *BinaryTree) PreOrderTraverse() {
 
 	for !s.IsEmpty() || nil != p {
 		if nil != p {
-			fmt.Printf("%+v ", p.data)
+			fmt.Printf("%+v ", p.Val)
 			s.Push(p)
-			p = p.left
+			p = p.Left
 		} else {
-			p = s.Pop().(*Node).right
+			p = s.Pop().(*Node).Right
 		}
 	}
 }
@@ -48,16 +48,16 @@ func (this *BinaryTree) PostOrderTraverse() {
 	for !s1.IsEmpty() {
 		p := s1.Pop().(*Node)
 		s2.Push(p)
-		if nil != p.left {
-			s1.Push(p.left)
+		if nil != p.Left {
+			s1.Push(p.Left)
 		}
-		if nil != p.right {
-			s1.Push(p.right)
+		if nil != p.Right {
+			s1.Push(p.Right)
 		}
 	}
 
 	for !s2.IsEmpty() {
-		fmt.Printf("%+v ", s2.Pop().(*Node).data)
+		fmt.Printf("%+v ", s2.Pop().(*Node).Val)
 	}
 }
 
@@ -73,16 +73,16 @@ func (this *BinaryTree) PostOrderTraverse2() {
 
 	for !s.IsEmpty() {
 		r = s.Top().(*Node)
-		if (r.left == nil && r.right == nil) || (pre != nil && (pre == r.left || pre == r.right)) {
-			fmt.Printf("%+v ", r.data)
+		if (r.Left == nil && r.Right == nil) || (pre != nil && (pre == r.Left || pre == r.Right)) {
+			fmt.Printf("%+v ", r.Val)
 			s.Pop()
 			pre = r
 		} else {
-			if r.right != nil {
-				s.Push(r.right)
+			if r.Right != nil {
+				s.Push(r.Right)
 			}
-			if r.left != nil {
-				s.Push(r.left)
+			if r.Left != nil {
+				s.Push(r.Left)
 			}
 		}
 	}

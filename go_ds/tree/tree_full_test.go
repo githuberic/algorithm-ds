@@ -13,9 +13,9 @@ func isFull(root *Node) bool {
 		return true
 	}
 
-	lHeight := Height(root.left)
-	rHeight := Height(root.right)
-	return isFull(root.left) && isFull(root.right) && (lHeight == rHeight)
+	lHeight := Height(root.Left)
+	rHeight := Height(root.Right)
+	return isFull(root.Left) && isFull(root.Right) && (lHeight == rHeight)
 }
 
 /**
@@ -28,13 +28,13 @@ func TestFull(t *testing.T) {
 	n2 := NewNode(3)
 	n3 := NewNode(4)
 	n4 := NewNode(5)
-	root.left = n1
-	root.right = n2
-	n1.left = n3
-	n1.right = n4
+	root.Left = n1
+	root.Right = n2
+	n1.Left = n3
+	n1.Right = n4
 
-	n2.left = NewNode(31)
-	n2.right = NewNode(32)
+	n2.Left = NewNode(31)
+	n2.Right = NewNode(32)
 
 	fmt.Println(isFull(root))
 }

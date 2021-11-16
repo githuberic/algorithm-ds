@@ -11,8 +11,8 @@ func Height(root *Node) int {
 		return 0
 	}
 
-	lHeight := Height(root.left)
-	rHeight := Height(root.right)
+	lHeight := Height(root.Left)
+	rHeight := Height(root.Right)
 	if lHeight > rHeight {
 		return lHeight + 1
 	} else {
@@ -27,10 +27,10 @@ func TestDepth(t *testing.T) {
 	n2 := NewNode(3)
 	n3 := NewNode(4)
 	n4 := NewNode(5)
-	root.left = n1
-	root.right = n2
-	n1.left = n3
-	n1.right = n4
+	root.Left = n1
+	root.Right = n2
+	n1.Left = n3
+	n1.Right = n4
 
 	fmt.Println(Height(root))
 }

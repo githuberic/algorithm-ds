@@ -14,13 +14,13 @@ func isBalanced(root *Node) bool {
 		return true
 	}
 
-	lde := Height(root.left)
-	rde := Height(root.right)
+	lde := Height(root.Left)
+	rde := Height(root.Right)
 	flag := false
 	if math.Abs(float64(lde-rde)) <= 1 {
 		flag = true
 	}
-	return flag && isBalanced(root.left) && isBalanced(root.right)
+	return flag && isBalanced(root.Left) && isBalanced(root.Right)
 }
 
 func TestBalanced(t *testing.T) {
@@ -30,13 +30,13 @@ func TestBalanced(t *testing.T) {
 	n2 := NewNode(3)
 	n3 := NewNode(4)
 	n4 := NewNode(5)
-	root.left = n1
-	root.right = n2
-	n1.left = n3
-	n1.right = n4
-	n2.left = NewNode(31)
-	n3.left = NewNode(41)
-	n3.right = NewNode(42)
+	root.Left = n1
+	root.Right = n2
+	n1.Left = n3
+	n1.Right = n4
+	n2.Left = NewNode(31)
+	n3.Left = NewNode(41)
+	n3.Right = NewNode(42)
 
 	fmt.Println(isBalanced(root))
 }

@@ -16,9 +16,9 @@ func preOrderTraversal(root *Node) []interface{} {
 	}
 
 	var res []interface{}
-	res = append(res, root.data)
-	res = append(res, preOrderTraversal(root.left)...)
-	res = append(res, preOrderTraversal(root.right)...)
+	res = append(res, root.Val)
+	res = append(res, preOrderTraversal(root.Left)...)
+	res = append(res, preOrderTraversal(root.Right)...)
 
 	return res
 }
@@ -32,9 +32,9 @@ func inOrderTraversal(root *Node) []interface{} {
 		return nil
 	}
 
-	res := inOrderTraversal(root.left)
-	res = append(res, root.data)
-	res = append(res, inOrderTraversal(root.right)...)
+	res := inOrderTraversal(root.Left)
+	res = append(res, root.Val)
+	res = append(res, inOrderTraversal(root.Right)...)
 
 	return res
 }
@@ -49,19 +49,19 @@ func postOrderTraversal(root *Node) []interface{} {
 	}
 
 	var res []interface{}
-	if root.left != nil {
-		lRes := postOrderTraversal(root.left)
+	if root.Left != nil {
+		lRes := postOrderTraversal(root.Left)
 		if len(lRes) > 0 {
 			res = append(res, lRes...)
 		}
 	}
-	if root.right != nil {
-		rRes := postOrderTraversal(root.right)
+	if root.Right != nil {
+		rRes := postOrderTraversal(root.Right)
 		if len(rRes) > 0 {
 			res = append(res, rRes...)
 		}
 	}
-	res = append(res, root.data)
+	res = append(res, root.Val)
 	return res
 }
 
@@ -74,10 +74,10 @@ func TestLoop(t *testing.T) {
 	n2 := NewNode(3)
 	n3 := NewNode(4)
 	n4 := NewNode(5)
-	root.left = n1
-	root.right = n2
-	n1.left = n3
-	n1.right = n4
+	root.Left = n1
+	root.Right = n2
+	n1.Left = n3
+	n1.Right = n4
 
 	values := preOrderTraversal(root)
 	fmt.Printf("Pre Order Value %v\n", values)
