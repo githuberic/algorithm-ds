@@ -13,6 +13,7 @@ func (tree *Node) DFS() []interface{} {
 		return nil
 	}
 
+	reS := NewStack()
 	s := NewStack()
 	s.Push(tree)
 	for !s.Empty() {
@@ -23,16 +24,13 @@ func (tree *Node) DFS() []interface{} {
 		if cur.right != nil {
 			s.Push(cur.right)
 		}
-		s.Push(cur.data)
+		reS.Push(cur)
 	}
 
 	var res []interface{}
-	/*
-	var res []interface{}
-	for !s.Empty() {
-		cur := s.Pop().(*Node)
-		res = append(res, cur.data)
-	}*/
+	for !reS.Empty() {
+		res = append(res, reS.Pop().(*Node).data)
+	}
 
 	return res
 }
@@ -50,6 +48,9 @@ func TestDFS(t *testing.T) {
 	root.right = n2
 	n1.left = n3
 	n1.right = n4
+
+	n3.left = NewNode(41)
+	n3.right = NewNode(42)
 
 	values := root.DFS()
 	fmt.Printf("DFS Order Value %v\n", values)
