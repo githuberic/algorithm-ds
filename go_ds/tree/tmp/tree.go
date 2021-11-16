@@ -29,11 +29,11 @@ func (root *Node) DFS() {
 			s.Push(cur.Right)
 		}
 		//fmt.Println(cur.Val)
-		res.Push(cur.Val)
+		res.Push(cur)
 	}
 
 	for !res.Empty() {
-		fmt.Printf("%v", res.Pop().(int))
+		fmt.Printf("%v", res.Pop().(*Node).Val)
 	}
 }
 

@@ -27,10 +27,12 @@ func (tree *Node) DFS() []interface{} {
 	}
 
 	var res []interface{}
+	/*
+	var res []interface{}
 	for !s.Empty() {
 		cur := s.Pop().(*Node)
 		res = append(res, cur.data)
-	}
+	}*/
 
 	return res
 }
