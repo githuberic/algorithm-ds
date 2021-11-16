@@ -6,8 +6,8 @@ type BinaryTree struct {
 	root *Node
 }
 
-func NewBinaryTree(rootV interface{}) *BinaryTree {
-	return &BinaryTree{NewNode(rootV)}
+func NewBinaryTree(v interface{}) *BinaryTree {
+	return &BinaryTree{NewNode(v)}
 }
 
 func (this *BinaryTree) InOrderTraverse() {
@@ -61,7 +61,6 @@ func (this *BinaryTree) PostOrderTraverse() {
 	}
 }
 
-
 //use one stack, pre cursor to traverse from post order
 func (this *BinaryTree) PostOrderTraverse2() {
 	r := this.root
@@ -74,9 +73,7 @@ func (this *BinaryTree) PostOrderTraverse2() {
 
 	for !s.IsEmpty() {
 		r = s.Top().(*Node)
-		if (r.left == nil && r.right == nil) ||
-			(pre != nil && (pre == r.left || pre == r.right)) {
-
+		if (r.left == nil && r.right == nil) || (pre != nil && (pre == r.left || pre == r.right)) {
 			fmt.Printf("%+v ", r.data)
 			s.Pop()
 			pre = r
@@ -84,7 +81,6 @@ func (this *BinaryTree) PostOrderTraverse2() {
 			if r.right != nil {
 				s.Push(r.right)
 			}
-
 			if r.left != nil {
 				s.Push(r.left)
 			}

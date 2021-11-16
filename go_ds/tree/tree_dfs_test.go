@@ -5,8 +5,10 @@ import (
 	"testing"
 )
 
-// 按层遍历
-func DFS(tree *Node) []interface{} {
+/**
+Tree深度优先遍历
+*/
+func (tree *Node) DFS() []interface{} {
 	if tree == nil {
 		return nil
 	}
@@ -15,16 +17,13 @@ func DFS(tree *Node) []interface{} {
 	s.Push(tree)
 	for !s.Empty() {
 		cur := s.Pop().(*Node)
-
 		if cur.left != nil {
-			s.Push(tree.left)
+			s.Push(cur.left)
 		}
-
 		if cur.right != nil {
-			s.Push(tree.right)
+			s.Push(cur.right)
 		}
-
-		s.Push(tree.data)
+		s.Push(cur.data)
 	}
 
 	var res []interface{}
@@ -37,7 +36,7 @@ func DFS(tree *Node) []interface{} {
 }
 
 /**
-验证是否满二叉树
+Tree深度遍历测试
 */
 func TestDFS(t *testing.T) {
 	root := NewNode(1)
@@ -49,11 +48,7 @@ func TestDFS(t *testing.T) {
 	root.right = n2
 	n1.left = n3
 	n1.right = n4
-	n4.left = NewNode(41)
-	n4.right = NewNode(42)
 
-	values := DFS(root)
+	values := root.DFS()
 	fmt.Printf("DFS Order Value %v\n", values)
 }
-
-// https://studygolang.com/articles/16314
