@@ -1,4 +1,4 @@
-package tree
+package binary_search_tree
 
 import "testing"
 
@@ -79,7 +79,7 @@ func TestBST_DeleteB(t *testing.T) {
 	bst := NewBST(1, compareFunc)
 
 	t.Log(bst.Delete(1))
-	t.Log(bst.root)
+	t.Log(bst.Root)
 
 	bst.InOrderTraverse()
 }

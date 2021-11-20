@@ -1,7 +1,12 @@
-package tree
+package binary_search_tree
+
+import (
+	"algorithm-ds/go_ds/tree"
+	"algorithm-ds/go_ds/tree/tree_v2"
+)
 
 type BST struct {
-	*BinaryTree
+	*tree_v2.BinaryTree
 	//比对函数，0:v==nodeV,正数:v>nodeV,负数:v<nodeV
 	compareFunc func(v, nodeV interface{}) int
 }
@@ -10,11 +15,11 @@ func NewBST(rootV interface{}, compareFunc func(v, nodeV interface{}) int) *BST 
 	if nil == compareFunc {
 		return nil
 	}
-	return &BST{BinaryTree: NewBinaryTree(rootV), compareFunc: compareFunc}
+	return &BST{BinaryTree: tree_v2.NewBinaryTree(rootV), compareFunc: compareFunc}
 }
 
-func (this *BST) Find(v interface{}) *Node {
-	p := this.root
+func (this *BST) Find(v interface{}) *tree.Node {
+	p := this.Root
 	for nil != p {
 		compareResult := this.compareFunc(v, p.Val)
 		if compareResult == 0 {
@@ -29,20 +34,20 @@ func (this *BST) Find(v interface{}) *Node {
 }
 
 func (this *BST) Insert(v interface{}) bool {
-	p := this.root
+	p := this.Root
 	for nil != p {
 		compareResult := this.compareFunc(v, p.Val)
 		if compareResult == 0 {
 			return false
 		} else if compareResult > 0 {
 			if nil == p.Right {
-				p.Right = NewNode(v)
+				p.Right = tree.NewNode(v)
 				break
 			}
 			p = p.Right
 		} else {
 			if nil == p.Left {
-				p.Left = NewNode(v)
+				p.Left = tree.NewNode(v)
 				break
 			}
 			p = p.Left
@@ -52,8 +57,8 @@ func (this *BST) Insert(v interface{}) bool {
 }
 
 func (this *BST) Delete(v interface{}) bool {
-	var pp *Node = nil
-	p := this.root
+	var pp *tree.Node = nil
+	p := this.Root
 	deleteLeft := false
 	for nil != p {
 		compareResult := this.compareFunc(v, p.Val)
@@ -80,7 +85,7 @@ func (this *BST) Delete(v interface{}) bool {
 				pp.Right = nil
 			}
 		} else { //根节点
-			this.root = nil
+			this.Root = nil
 		}
 	} else if nil != p.Right { //删除的是一个有右孩子，不一定有左孩子的节点
 		//找到p节点右孩子的最小节点
@@ -100,7 +105,7 @@ func (this *BST) Delete(v interface{}) bool {
 		q.Left = p.Left
 		q.Right = p.Right
 		if nil == pp { //根节点被删除
-			this.root = q
+			this.Root = q
 		} else {
 			if deleteLeft {
 				pq.Left = q
@@ -117,9 +122,9 @@ func (this *BST) Delete(v interface{}) bool {
 			}
 		} else {
 			if deleteLeft {
-				this.root = p.Left
+				this.Root = p.Left
 			} else {
-				this.root = p.Left
+				this.Root = p.Left
 			}
 		}
 	}
@@ -127,16 +132,16 @@ func (this *BST) Delete(v interface{}) bool {
 }
 
 
-func (this *BST) Min() *Node {
-	p := this.root
+func (this *BST) Min() *tree.Node {
+	p := this.Root
 	for nil != p.Left {
 		p = p.Left
 	}
 	return p
 }
 
-func (this *BST) Max() *Node {
-	p := this.root
+func (this *BST) Max() *tree.Node {
+	p := this.Root
 	for nil != p.Right {
 		p = p.Right
 	}
