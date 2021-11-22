@@ -2,6 +2,7 @@ package tree_v2
 
 import (
 	"algorithm-ds/go_ds/tree"
+	"algorithm-ds/go_ds/tree/stack/v2"
 	"fmt"
 )
 
@@ -18,7 +19,7 @@ func NewBinaryTree(v interface{}) *BinaryTree {
 */
 func (this *BinaryTree) PreOrderTraverse() {
 	p := this.Root
-	s := tree.NewArrayStack()
+	s := v2.NewArrayStack()
 
 	for !s.IsEmpty() || nil != p {
 		if nil != p {
@@ -36,7 +37,7 @@ func (this *BinaryTree) PreOrderTraverse() {
  */
 func (this *BinaryTree) InOrderTraverse() {
 	p := this.Root
-	s := tree.NewArrayStack()
+	s := v2.NewArrayStack()
 
 	for !s.IsEmpty() || nil != p {
 		if nil != p {
@@ -54,8 +55,8 @@ func (this *BinaryTree) InOrderTraverse() {
 后续遍历
  */
 func (this *BinaryTree) PostOrderTraverse() {
-	s1 := tree.NewArrayStack()
-	s2 := tree.NewArrayStack()
+	s1 := v2.NewArrayStack()
+	s2 := v2.NewArrayStack()
 	s1.Push(this.Root)
 	for !s1.IsEmpty() {
 		p := s1.Pop().(*tree.Node)

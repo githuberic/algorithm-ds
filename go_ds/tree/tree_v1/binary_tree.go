@@ -2,6 +2,7 @@ package tree_v1
 
 import (
 	"algorithm-ds/go_ds/tree"
+	"algorithm-ds/go_ds/tree/stack/v1"
 	"math"
 )
 
@@ -146,8 +147,8 @@ func DFS(root *tree.Node) []interface{} {
 		return nil
 	}
 
-	reS := tree.NewStack()
-	s := tree.NewStack()
+	reS := v1.NewStack()
+	s := v1.NewStack()
 	s.Push(root)
 	for !s.Empty() {
 		cur := s.Pop().(*tree.Node)

@@ -1,4 +1,4 @@
-package tree
+package v2
 
 import "fmt"
 
@@ -9,6 +9,7 @@ import "fmt"
 type ArrayStack struct {
 	//数据
 	data []interface{}
+
 	//栈顶指针
 	top int
 }
