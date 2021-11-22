@@ -2,6 +2,8 @@ package example
 
 import (
 	"algorithm-ds/go_ds/stack"
+	"algorithm-ds/go_ds/stack/v1"
+	"algorithm-ds/go_ds/stack/v2"
 	"fmt"
 )
 
@@ -12,8 +14,8 @@ type Browser struct {
 
 func NewBrowser() *Browser {
 	return &Browser{
-		forwardStack: stack.NewArrayStack(),
-		backStack:    stack.NewLinkedListStack(),
+		forwardStack: v1.NewArrayStack(),
+		backStack:    v2.NewLinkedListStack(),
 	}
 }
 
