@@ -1,7 +1,7 @@
 package heap
 
 
-//build a heap
+//build arr heap
 func buidHeap(a []int, n int) {
 
 	//heapify from the last parent node
@@ -10,7 +10,7 @@ func buidHeap(a []int, n int) {
 	}
 }
 
-//sort by ascend, a index begin from 1, has n elements
+//sort by ascend, arr index begin from 1, has n elements
 func sort(a []int, n int) {
 	buidHeap(a, n)
 

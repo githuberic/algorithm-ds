@@ -1,8 +1,8 @@
 package heap
 
 type Heap struct {
-	a     []int
-	n     int
+	arr []int
+	n   int
 	count int
 }
 
@@ -10,9 +10,8 @@ type Heap struct {
 func NewHeap(capacity int) *Heap {
 	heap := &Heap{}
 	heap.n = capacity
-	heap.a = make([]int, capacity+1)
+	heap.arr = make([]int, capacity+1)
 	heap.count = 0
-
 	return heap
 }
 
@@ -24,13 +23,13 @@ func (heap *Heap) insert(data int) {
 	}
 
 	heap.count++
-	heap.a[heap.count] = data
+	heap.arr[heap.count] = data
 
 	//compare with parent node
 	i := heap.count
 	parent := i / 2
-	for parent > 0 && heap.a[parent] < heap.a[i] {
-		swap(heap.a, parent, i)
+	for parent > 0 && heap.arr[parent] < heap.arr[i] {
+		swap(heap.arr, parent, i)
 		i = parent
 		parent = i / 2
 	}
@@ -38,18 +37,17 @@ func (heap *Heap) insert(data int) {
 
 //heapfify from up to down
 func (heap *Heap) removeMax() {
-
 	//defensive
 	if heap.count == 0 {
 		return
 	}
 
 	//swap max and last
-	swap(heap.a, 1, heap.count)
+	swap(heap.arr, 1, heap.count)
 	heap.count--
 
 	//heapify from up to down
-	heapifyUpToDown(heap.a, heap.count, 0)
+	heapifyUpToDown(heap.arr, heap.count, 0)
 }
 
 //heapify
