@@ -37,7 +37,27 @@ func (h *Heap) Push(x int) {
 	h.up(len(h.Val) - 1)
 }
 
-func (h *Heap) Down(i int) {
+func (h *Heap) downV2(i int) {
+	//存储u
+	tmp := i
+	n := len(h.Val)
+	left := 2*i + 1
+	if left < n && h.less(left, tmp) {
+		tmp = left
+	}
+
+	right := 2*i + 2
+	if right < n && h.less(right, tmp) {
+		tmp = right
+	}
+
+	if tmp != i {
+		h.swap(i, tmp)
+		h.downV2(tmp)
+	}
+}
+
+func (h *Heap) down(i int) {
 	for {
 		// Left
 		left := 2*i + 1
@@ -72,10 +92,12 @@ func (h *Heap) Remove(i int) (int, bool) {
 	// 删除最后的元素
 	x := (h.Val)[n]
 	h.Val = (h.Val)[0:n]
+
 	// 如果当前元素大于父结点，向下筛选
 	if (h.Val)[i] > (h.Val)[(i-1)/2] {
-		h.Down(i)
-	} else { // 当前元素小于父结点，向上筛选
+		h.down(i)
+	} else {
+		// 当前元素小于父结点，向上筛选
 		h.up(i)
 	}
 
@@ -88,14 +110,14 @@ func (h *Heap) Pop() int {
 	h.swap(0, n)
 	x := (h.Val)[n]
 	h.Val = (h.Val)[0:n]
-	h.Down(0)
+	h.down(0)
 	return x
 }
 
 func (h *Heap) Sort() []interface{} {
 	var res []interface{}
 	for len(h.Val) != 0 {
-		res = append(res,h.Pop())
+		res = append(res, h.Pop())
 	}
 	return res
 }
@@ -105,6 +127,6 @@ func (h *Heap) Init() {
 
 	// i > n/2-1 的结点为叶子结点本身已经是堆了
 	for i := n/2 - 1; i >= 0; i-- {
-		h.Down(i)
+		h.down(i)
 	}
 }
