@@ -8,8 +8,12 @@ import (
 func TestHeap(t *testing.T) {
 	var h = NewHeap()
 	h.Val = []int{20, 7, 3, 10, 15, 25, 30, 17, 19}
+
 	h.Init()
 	fmt.Println(h) // [3 7 20 10 15 25 30 17 19]
+
+	sorted := h.Sort()
+	fmt.Println(sorted) // [3 7 20 10 15 25 30 17 19]
 
 	h.Push(6)
 	fmt.Println(h) // [3 6 20 10 7 25 30 17 19 15]

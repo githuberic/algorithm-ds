@@ -4,6 +4,7 @@ type Heap struct {
 	Val []int
 }
 
+// 本实例构建最小堆 /**
 func NewHeap() *Heap {
 	return &Heap{make([]int, 0, 32)}
 }
@@ -12,19 +13,19 @@ func (h *Heap) swap(i, j int) {
 	h.Val[i], h.Val[j] = h.Val[j], h.Val[i]
 }
 
-func (this *Heap) less(i, j int) bool {
-	return this.Val[i] < this.Val[j]
+func (h *Heap) less(i, j int) bool {
+	return h.Val[i] < h.Val[j]
 }
 
-func (this *Heap) up(i int) {
+func (h *Heap) up(i int) {
 	for {
 		// 父亲结点
 		parent := (i - 1) / 2
-		if i == parent || this.less(parent, i) {
+		if i == parent || h.less(parent, i) {
 			break
 		}
 
-		this.swap(parent, i)
+		h.swap(parent, i)
 		i = parent
 	}
 }
@@ -48,11 +49,14 @@ func (h *Heap) Down(i int) {
 		if r := left + 1; r < len(h.Val) && h.less(r, left) {
 			j = r // 右孩子
 		}
+
 		if h.less(i, j) {
 			break // 如果父结点比孩子结点小，则不交换
 		}
+
 		h.swap(i, j) // 交换父结点和子结点
-		i = j        //继续向下比较
+
+		i = j //继续向下比较
 	}
 }
 
@@ -62,6 +66,7 @@ func (h *Heap) Remove(i int) (int, bool) {
 	if i < 0 || i > len(h.Val)-1 {
 		return 0, false
 	}
+
 	n := len(h.Val) - 1
 	h.swap(i, n) // 用最后的元素值替换被删除元素
 	// 删除最后的元素
@@ -73,10 +78,11 @@ func (h *Heap) Remove(i int) (int, bool) {
 	} else { // 当前元素小于父结点，向上筛选
 		h.up(i)
 	}
+
 	return x, true
 }
 
-// 弹出堆顶的元素，并返回其值
+// Pop 弹出堆顶的元素，并返回其值 /**
 func (h *Heap) Pop() int {
 	n := len(h.Val) - 1
 	h.swap(0, n)
@@ -86,8 +92,17 @@ func (h *Heap) Pop() int {
 	return x
 }
 
+func (h *Heap) Sort() []interface{} {
+	var res []interface{}
+	for len(h.Val) != 0 {
+		res = append(res,h.Pop())
+	}
+	return res
+}
+
 func (h *Heap) Init() {
 	n := len(h.Val)
+
 	// i > n/2-1 的结点为叶子结点本身已经是堆了
 	for i := n/2 - 1; i >= 0; i-- {
 		h.Down(i)
