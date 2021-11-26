@@ -12,13 +12,12 @@ func TestHeap(t *testing.T) {
 	h.Init()
 	fmt.Printf("Init,%v\n",h.Val) // [3 7 20 10 15 25 30 17 19]
 
-	sorted := h.Sort()
-	fmt.Printf("Sorted,%v\n",sorted)
+	h.Sort()
+	fmt.Printf("Sorted,%v\n",h.Val)
 
-	/*
 	h.Push(6)
 	fmt.Printf("Pushed,%v\n",h.Val)
-*/
+
 	x, ok := h.Remove(5)
 	fmt.Println(x, ok, h.Val) // 25 true [3 6 15 10 7 20 30 17 19]
 

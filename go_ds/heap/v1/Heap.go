@@ -25,7 +25,9 @@ func (h *Heap) up(i int) {
 			break
 		}
 
+		// 如果父结点比孩子结点小，则交换
 		h.swap(parent, i)
+		// 继续向下比较
 		i = parent
 	}
 }
@@ -37,26 +39,6 @@ func (h *Heap) Push(x int) {
 	h.up(len(h.Val) - 1)
 }
 
-func (h *Heap) downV2(i int) {
-	//存储u
-	tmp := i
-	n := len(h.Val)
-	left := 2*i + 1
-	if left < n && h.less(left, tmp) {
-		tmp = left
-	}
-
-	right := 2*i + 2
-	if right < n && h.less(right, tmp) {
-		tmp = right
-	}
-
-	if tmp != i {
-		h.swap(i, tmp)
-		h.downV2(tmp)
-	}
-}
-
 func (h *Heap) down(i int) {
 	for {
 		// Left
@@ -65,6 +47,7 @@ func (h *Heap) down(i int) {
 			break // i已经是叶子结点了
 		}
 
+		// 从left,right中选择min,
 		j := left
 		if r := left + 1; r < len(h.Val) && h.less(r, left) {
 			j = r // 右孩子
@@ -75,8 +58,7 @@ func (h *Heap) down(i int) {
 		}
 
 		h.swap(i, j) // 交换父结点和子结点
-
-		i = j //继续向下比较
+		i = j        //继续向下比较
 	}
 }
 
@@ -114,12 +96,12 @@ func (h *Heap) Pop() int {
 	return x
 }
 
-func (h *Heap) Sort() []interface{} {
-	var res []interface{}
+func (h *Heap) Sort() {
+	var res []int
 	for len(h.Val) != 0 {
 		res = append(res, h.Pop())
 	}
-	return res
+	h.Val = res
 }
 
 func (h *Heap) Init() {
