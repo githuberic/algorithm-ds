@@ -43,6 +43,7 @@ func HeapSort(s []int) {
 	for k := N / 2; k >= 1; k-- {
 		sink(s, k, N)
 	}
+
 	//下沉排序
 	for N > 1 {
 		swap(s, 1, N) //将大的放在数组后面，升序排序

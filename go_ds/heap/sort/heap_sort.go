@@ -29,7 +29,7 @@ func heapify(arr []int, n, i int) {
 	}
 }
 
-// 创建堆
+// 创建堆(构建最大堆)
 func buildHeap(arr []int, n int) {
 	lastNode := n - 1            // 最后一个结点
 	parent := (lastNode - 1) / 2 // 最后一个结点的父节点
@@ -41,7 +41,7 @@ func buildHeap(arr []int, n int) {
 }
 
 func heapSort(arr []int, n int) {
-	buildHeap(arr,n)
+	buildHeap(arr, n)
 
 	// 重复：第一个结点和最后一个结点交换位置，然后重新调整堆排序，i--去掉最后一个结点
 	for i := n - 1; i >= 0; i-- {
