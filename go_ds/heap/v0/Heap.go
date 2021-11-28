@@ -34,7 +34,7 @@ func (h *HeapV0) insert(data int) {
 func (h *HeapV0) down(i int) {
 	for {
 		maxIndex := i
-		if h.Arr[i] < h.Arr[i*2] {
+		if i*2 <= h.Count && h.Arr[i] < h.Arr[i*2] {
 			maxIndex = i * 2
 		}
 

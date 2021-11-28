@@ -1,6 +1,8 @@
 package v0
 
-import "algorithm-ds/go_ds/heap"
+import (
+	"algorithm-ds/go_ds/heap"
+)
 
 //build arr heap
 func buidHeap(a []int, n int) *HeapV0 {
@@ -20,10 +22,10 @@ func buidHeap(a []int, n int) *HeapV0 {
 func sort(a []int, n int) {
 	heapV0 := buidHeap(a, n)
 
-	k := n
+	k := n - 1
 	for k >= 1 {
-		heapV0.Swap(1, k)
-		heapV0.down(k - 1)
+		heapV0.Swap(0, k)
+		heapV0.down(k)
 		k--
 	}
 }
