@@ -9,9 +9,16 @@ func TestHeap(t *testing.T) {
 	arr := []int{20, 7, 3, 10, 15, 25, 30, 17, 19}
 	n := len(arr)
 
-	heapv0 := buidHeap(arr,n)
-	fmt.Println(heapv0.Heap.String())
+	h := New(arr, n)
+	h.Init()
 
-	sort(arr,n)
-	fmt.Println(heapv0.Heap.String())
+	fmt.Println(h.Heap.String())
+}
+
+func TestHeapSort(t *testing.T) {
+	arr := []int{20, 7, 3, 10, 15, 25, 30, 17, 19}
+	n := len(arr)
+
+	sortedArr := sort(arr, n)
+	fmt.Printf("Sorted:%v", sortedArr)
 }

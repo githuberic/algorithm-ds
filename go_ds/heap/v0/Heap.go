@@ -10,6 +10,13 @@ func NewHeapV0(base heap.Heap) *HeapV0 {
 	return &HeapV0{base}
 }
 
+func New(arr []int, capacity int) *HeapV0 {
+	heap := heap.NewHeap(capacity)
+	heap.Arr = arr
+
+	return NewHeapV0(*heap)
+}
+
 //top-max heap -> heapify from down to up
 func (h *HeapV0) insert(data int) {
 	//defensive
@@ -31,6 +38,7 @@ func (h *HeapV0) insert(data int) {
 }
 
 //heapify
+/*
 func (h *HeapV0) down(i int) {
 	for {
 		maxIndex := i
@@ -49,6 +57,30 @@ func (h *HeapV0) down(i int) {
 		h.Swap(i, maxIndex)
 		i = maxIndex
 	}
+}*/
+
+
+func (h *HeapV0) down(i int) {
+	for {
+		// Left
+		left := 2*i + 1
+		if left >= len(h.Arr) {
+			break // i已经是叶子结点了
+		}
+
+		// 从left,right中选择min,
+		j := left
+		if r := left + 1; r < len(h.Arr) && h.Less(r, left) {
+			j = r // 右孩子
+		}
+
+		if h.Less(i, j) {
+			break // 如果父结点比孩子结点小，则不交换
+		}
+
+		h.Swap(i, j) // 交换父结点和子结点
+		i = j        //继续向下比较
+	}
 }
 
 //heapfify from up to down
@@ -64,4 +96,13 @@ func (h *HeapV0) removeMax() {
 
 	//heapify from up to down
 	h.down(0)
+}
+
+func (h *HeapV0) Init() {
+	n := len(h.Arr)
+
+	// i > n/2-1 的结点为叶子结点本身已经是堆了
+	for i := n/2 - 1; i >= 0; i-- {
+		h.down(i)
+	}
 }
