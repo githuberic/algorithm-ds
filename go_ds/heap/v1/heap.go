@@ -8,60 +8,18 @@ type HeapV1 struct {
 
 // 本实例构建最小堆 /**
 func NewHeapV1(arr []int) *HeapV1 {
-	heap := heap.NewHeap(arr)
+	h := heap.NewHeap(arr)
 
 	heapV1 := HeapV1{}
-	heapV1.Heap = *heap
+	heapV1.Heap = *h
 	return &heapV1
 }
 
-func (h *HeapV1) up(i int) {
-	for {
-		// 父亲结点
-		parent := (i - 1) / 2
-		if i == parent || h.Less(parent, i) {
-			break
-		}
-
-		// 如果父结点比孩子结点小，则交换
-		h.Swap(parent, i)
-		// 继续向下比较
-		i = parent
-	}
-}
-
-// 注意go中所有参数转递都是值传递
-// 所以要让h的变化在函数外也起作用，此处得传指针
 func (h *HeapV1) Push(x int) {
 	h.Arr = append(h.Arr, x)
 	h.up(len(h.Arr) - 1)
 }
 
-func (h *HeapV1) down(i int) {
-	for {
-		// Left
-		left := 2*i + 1
-		if left >= len(h.Arr) {
-			break // i已经是叶子结点了
-		}
-
-		// 从left,right中选择min,
-		j := left
-		if r := left + 1; r < len(h.Arr) && h.Less(r, left) {
-			j = r // 右孩子
-		}
-
-		if h.Less(i, j) {
-			break // 如果父结点比孩子结点小，则不交换
-		}
-
-		h.Swap(i, j) // 交换父结点和子结点
-		i = j        //继续向下比较
-	}
-}
-
-// 删除堆中位置为i的元素
-// 返回被删元素的值
 func (h *HeapV1) Remove(i int) (int, bool) {
 	if i < 0 || i > len(h.Arr)-1 {
 		return 0, false
@@ -100,5 +58,43 @@ func (h *HeapV1) Init() {
 	// i > n/2-1 的结点为叶子结点本身已经是堆了
 	for i := n/2 - 1; i >= 0; i-- {
 		h.down(i)
+	}
+}
+
+func (h *HeapV1) up(i int) {
+	for {
+		// 父亲结点
+		parent := (i - 1) / 2
+		if i == parent || h.Less(parent, i) {
+			break
+		}
+
+		// 如果父结点比孩子结点小，则交换
+		h.Swap(parent, i)
+		// 继续向下比较
+		i = parent
+	}
+}
+
+func (h *HeapV1) down(i int) {
+	for {
+		// Left
+		left := 2*i + 1
+		if left >= len(h.Arr) {
+			break // i已经是叶子结点了
+		}
+
+		// 从left,right中选择min,
+		j := left
+		if r := left + 1; r < len(h.Arr) && h.Less(r, left) {
+			j = r // 右孩子
+		}
+
+		if h.Less(i, j) {
+			break // 如果父结点比孩子结点小，则不交换
+		}
+
+		h.Swap(i, j) // 交换父结点和子结点
+		i = j        //继续向下比较
 	}
 }

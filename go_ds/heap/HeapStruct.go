@@ -2,6 +2,7 @@ package heap
 
 import "fmt"
 
+// 堆结构体
 type Heap struct {
 	Arr []int
 }
@@ -22,6 +23,10 @@ func (h *Heap) Less(i, j int) bool {
 	return h.Arr[i] < h.Arr[j]
 }
 
+func (h *Heap) Greater(i, j int) bool {
+	return h.Arr[i] > h.Arr[j]
+}
+
 func (h *Heap) String() string {
-	return fmt.Sprintf("Arr:%+v", h.Arr)
+	return fmt.Sprintf("Heap array:%+v", h.Arr)
 }

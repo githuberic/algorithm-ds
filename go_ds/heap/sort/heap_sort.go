@@ -1,12 +1,23 @@
 package sort
 
-// 交换数组位置
-func swap(arr []int, i, j int) {
-	arr[i], arr[j] = arr[j], arr[i]
+import "algorithm-ds/go_ds/heap"
+
+type HeapSortV1 struct {
+	heap.Heap
+}
+
+// 本实例构建最小堆 /**
+func NewHeapSortV1(arr []int) *HeapSortV1 {
+	h := heap.NewHeap(arr)
+
+	heapV1 := HeapSortV1{}
+	heapV1.Heap = *h
+	return &heapV1
 }
 
 // 调整堆,第i个结点
-func heapify(arr []int, n, i int) {
+func (h *HeapSortV1) Heapify(i int) {
+	n := len(h.Arr)
 	if i >= n {
 		return
 	}
@@ -16,36 +27,37 @@ func heapify(arr []int, n, i int) {
 	right := 2*i + 2
 	max := i
 
-	if left < n && arr[left] > arr[max] {
+	if left < n && h.Greater(left, max) {
 		max = left
 	}
-	if right < n && arr[right] > arr[max] {
+	if right < n && h.Greater(right, max) {
 		max = right
 	}
 
 	if max != i {
-		swap(arr, max, i)
-		heapify(arr, n, max)
+		h.Swap(max, i)
+		h.Heapify(max)
 	}
 }
 
 // 创建堆(构建最大堆)
-func buildHeap(arr []int, n int) {
-	lastNode := n - 1            // 最后一个结点
+func (h *HeapSortV1) buildHeap(arr []int) {
+	lastNode := len(arr) - 1     // 最后一个结点
 	parent := (lastNode - 1) / 2 // 最后一个结点的父节点
 
 	// 往最后一个父节点开始，不断往前创建结点
 	for i := parent; i >= 0; i-- {
-		heapify(arr, n, i)
+		h.Heapify(i)
 	}
 }
 
-func heapSort(arr []int, n int) {
-	buildHeap(arr, n)
+func (h *HeapSortV1) Sort(arr []int) {
+	h.buildHeap(arr)
+	n := len(arr)
 
 	// 重复：第一个结点和最后一个结点交换位置，然后重新调整堆排序，i--去掉最后一个结点
 	for i := n - 1; i >= 0; i-- {
-		swap(arr, i, 0)
-		heapify(arr, i, 0)
+		h.Swap(i, 0)
+		h.Heapify(i)
 	}
 }
