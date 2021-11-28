@@ -52,7 +52,7 @@ func (h *HeapV1) Pop() int {
 	return x
 }
 
-func (h *HeapV1) Init() {
+func (h *HeapV1) Heapify() {
 	n := len(h.Arr)
 
 	// i > n/2-1 的结点为叶子结点本身已经是堆了

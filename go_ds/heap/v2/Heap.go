@@ -1,38 +1,35 @@
 package v2
 
-type Heap struct {
-	Val []int
+import "algorithm-ds/go_ds/heap"
+
+type HeapV2 struct {
+	heap.Heap
 }
 
-// 本实例构建最小堆 /**
-func NewHeap() *Heap {
-	return &Heap{make([]int, 0, 32)}
+func NewHeapV2(arr []int) *HeapV2 {
+	h := heap.NewHeap(arr)
+
+	heapV1 := HeapV2{}
+	heapV1.Heap = *h
+	return &heapV1
 }
 
-func (h *Heap) swap(i, j int) {
-	h.Val[i], h.Val[j] = h.Val[j], h.Val[i]
-}
-
-func (h *Heap) less(i, j int) bool {
-	return h.Val[i] < h.Val[j]
-}
-
-func (h *Heap) down(i int) {
+func (h *HeapV2) down(i int) {
 	//存储u
 	tmp := i
-	n := len(h.Val)
+	n := len(h.Arr)
 	left := 2*i + 1
-	if left < n && h.less(left, tmp) {
+	if left < n && h.Less(left, tmp) {
 		tmp = left
 	}
 
 	right := 2*i + 2
-	if right < n && h.less(right, tmp) {
+	if right < n && h.Less(right, tmp) {
 		tmp = right
 	}
 
 	if tmp != i {
-		h.swap(i, tmp)
+		h.Less(i, tmp)
 		h.down(tmp)
 	}
 }

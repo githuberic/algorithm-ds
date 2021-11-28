@@ -10,11 +10,11 @@ var h *HeapV1
 func init() {
 	arr := []int{20, 7, 3, 10, 15, 25, 30, 17, 19}
 	h = NewHeapV1(arr)
-	h.Init()
+	h.Heapify()
 }
 
 func TestHeapInit(t *testing.T) {
-	fmt.Println("Init", h.String()) // [3 7 20 10 15 25 30 17 19]
+	fmt.Println("Heapify", h.String()) // [3 7 20 10 15 25 30 17 19]
 }
 
 func TestHeapPush(t *testing.T) {
