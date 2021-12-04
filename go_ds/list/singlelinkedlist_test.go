@@ -36,9 +36,9 @@ func TestDeleteNode(t *testing.T) {
 	}
 	l.Print()
 
-	t.Log(l.DeleteNode(l.head.next))
+	t.Log(l.DeleteNode(l.Head.Next))
 	l.Print()
 
-	t.Log(l.DeleteNode(l.head.next.next))
+	t.Log(l.DeleteNode(l.Head.Next.Next))
 	l.Print()
 }

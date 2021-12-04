@@ -1,12 +1,14 @@
-package list
+package examples
+
+import "algorithm-ds/go_ds/list"
 
 /*
 思路1：开一个栈存放链表前半段
 时间复杂度：O(N)
 空间复杂度：O(N)
 */
-func isPalindrome1(l *SingleLinkedList) bool {
-	lLen := l.length
+func isPalindrome1(l *list.SingleLinkedList) bool {
+	lLen := l.Length
 	if lLen == 0 {
 		return false
 	}
@@ -15,9 +17,9 @@ func isPalindrome1(l *SingleLinkedList) bool {
 	}
 
 	s := make([]string, 0, lLen/2)
-	cur := l.head
+	cur := l.Head
 	for i := uint(1); i <= lLen; i++ {
-		cur = cur.next
+		cur = cur.Next
 		if lLen%2 != 0 && i == (lLen/2+1) { //如果链表有奇数个节点，中间的直接忽略
 			continue
 		}
@@ -38,8 +40,8 @@ func isPalindrome1(l *SingleLinkedList) bool {
 找到链表中间节点，将前半部分转置，再从中间向左右遍历对比
 时间复杂度：O(N)
 */
-func isPalindrome2(l *SingleLinkedList) bool {
-	lLen := l.length
+func isPalindrome2(l *list.SingleLinkedList) bool {
+	lLen := l.Length
 	if lLen == 0 {
 		return false
 	}
@@ -48,19 +50,19 @@ func isPalindrome2(l *SingleLinkedList) bool {
 	}
 	var isPalindrome = true
 	step := lLen / 2
-	var pre *Node = nil
-	cur := l.head.next
-	next := l.head.next.next
+	var pre *list.Node = nil
+	cur := l.Head.Next
+	next := l.Head.Next.Next
 	for i := uint(1); i <= step; i++ {
 		tmp := cur.GetNext()
-		cur.next = pre
+		cur.Next = pre
 		pre = cur
 		cur = tmp
 		next = cur.GetNext()
 	}
 	mid := cur
 
-	var left, right *Node = pre, nil
+	var left, right *list.Node = pre, nil
 	if lLen%2 != 0 { //
 		right = mid.GetNext()
 	} else {
@@ -81,11 +83,11 @@ func isPalindrome2(l *SingleLinkedList) bool {
 	pre = mid
 	for nil != cur {
 		next = cur.GetNext()
-		cur.next = pre
+		cur.Next = pre
 		pre = cur
 		cur = next
 	}
-	l.head.next = pre
+	l.Head.Next = pre
 
 	return isPalindrome
 }

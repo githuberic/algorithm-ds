@@ -1,11 +1,14 @@
-package list
+package examples
 
-import "testing"
+import (
+	"algorithm-ds/go_ds/list"
+	"testing"
+)
 
 func TestPalindrome1(t *testing.T) {
 	strs := []string{"heooeh", "hello", "heoeh", "a", ""}
 	for _, str1 := range strs {
-		l := NewLinkedList()
+		l := list.NewLinkedList()
 		for _, c := range str1 {
 			l.InsertToTail(string(c))
 		}
@@ -17,7 +20,7 @@ func TestPalindrome1(t *testing.T) {
 func TestPalindrome2(t *testing.T) {
 	strs := []string{"heooeh", "hello", "heoeh", "a", ""}
 	for _, str1 := range strs {
-		l := NewLinkedList()
+		l := list.NewLinkedList()
 		for _, c := range str1 {
 			l.InsertToTail(string(c))
 		}
