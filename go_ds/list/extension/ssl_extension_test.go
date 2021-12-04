@@ -27,3 +27,32 @@ func TestHasCycle(t *testing.T) {
 	ssl.Head.Next.Next.Next.Next.Next.Next = ssl.Head.Next.Next.Next
 	t.Log(ssl.HasCycle())
 }
+
+func TestMergeSortedList(t *testing.T) {
+	l1 := list.NewLinkedList()
+	for i := 0; i < 5; i++ {
+		l1.InsertToHead(i + 1)
+	}
+	ssl1 := NewSSLExtension(*l1)
+
+	l2 := list.NewLinkedList()
+	for i := 5; i < 10; i++ {
+		l2.InsertToHead(i + 1)
+	}
+	ssl2 := NewSSLExtension(*l2)
+
+	MergeSortedList(ssl2, ssl1).Print()
+}
+
+
+func TestDeleteBottomN(t *testing.T) {
+	ssl.Print()
+	ssl.DeleteBottomN(3)
+	ssl.Print()
+}
+
+func TestFindMiddleNode(t *testing.T) {
+	ssl.DeleteBottomN(1)
+	ssl.Print()
+	t.Log(ssl.FindMiddleNode())
+}

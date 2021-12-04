@@ -2,7 +2,6 @@ package extension
 
 import (
 	"algorithm-ds/go_ds/list"
-	"fmt"
 )
 
 type SSLExtension struct {
@@ -21,15 +20,16 @@ func (s *SSLExtension) Reverse() {
 
 	// pre 前驱节点
 	var pre *list.Node = nil
-
 	// 当前需要逆序的节点
 	cur := s.Head.Next
-	fmt.Printf("Cur = %v\n", cur.Value)
 	for nil != cur {
-		tmp := cur.Next
+		// 将next设置为curr.next
+		next := cur.Next
+		// 将curr.next设置为curr.prev
 		cur.Next = pre
+		// 将prev和curr的节点依次向后移动一位
 		pre = cur
-		cur = tmp
+		cur = next
 	}
 
 	s.Head.Next = pre
