@@ -1,7 +1,5 @@
 package practices
 
-import "fmt"
-
 //单链表节点
 type ListNode struct {
 	next  *ListNode
@@ -11,20 +9,6 @@ type ListNode struct {
 //单链表
 type LinkedList struct {
 	head *ListNode
-}
-
-//打印链表
-func (this *LinkedList) Print() {
-	cur := this.head.next
-	format := ""
-	for nil != cur {
-		format += fmt.Sprintf("%+v", cur.value)
-		cur = cur.next
-		if nil != cur {
-			format += "->"
-		}
-	}
-	fmt.Println(format)
 }
 
 /*
