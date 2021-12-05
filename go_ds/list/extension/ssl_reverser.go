@@ -1,6 +1,8 @@
 package extension
 
-import "algorithm-ds/go_ds/list"
+import (
+	"algorithm-ds/go_ds/list"
+)
 
 type SSLReverser struct {
 	list.SingleLinkedList

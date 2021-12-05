@@ -41,7 +41,7 @@ func TestMergeSortedList(t *testing.T) {
 	}
 	ssl2 := NewSSLExtension(*l2)
 
-	MergeSortedList(ssl2, ssl1).Print()
+	MergeSortedList(ssl1,ssl2).Print()
 }
 
 

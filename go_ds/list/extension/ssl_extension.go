@@ -13,15 +13,15 @@ func NewSSLExtension(ssl list.SingleLinkedList) *SSLExtension {
 }
 
 // Reverse 单链表反转 /**
-func (s *SSLExtension) Reverse() {
-	if nil == s.Head || nil == s.Head.Next || nil == s.Head.Next.Next {
+func (ssl *SSLExtension) Reverse() {
+	if nil == ssl.Head || nil == ssl.Head.Next || nil == ssl.Head.Next.Next {
 		return
 	}
 
 	// pre 前驱节点
 	var pre *list.Node = nil
 	// 当前需要逆序的节点
-	cur := s.Head.Next
+	cur := ssl.Head.Next
 	for nil != cur {
 		// 将next设置为curr.next
 		tmp := cur.Next
@@ -32,9 +32,8 @@ func (s *SSLExtension) Reverse() {
 		cur = tmp
 	}
 
-	s.Head.Next = pre
+	ssl.Head.Next = pre
 }
-// 详细见 https://danny-jiang.blog.csdn.net/article/details/84282723
 
 // HasCycle 判断单链表是否有环 /**
 func (ssl *SSLExtension) HasCycle() bool {
@@ -61,7 +60,7 @@ func MergeSortedList(l1, l2 *SSLExtension) *SSLExtension {
 		return l1
 	}
 
-	l := &SSLExtension{list.SingleLinkedList{}}
+	l := &SSLExtension{*list.NewLinkedList()}
 	cur := l.Head
 	curl1 := l1.Head.Next
 	curl2 := l2.Head.Next
@@ -86,12 +85,12 @@ func MergeSortedList(l1, l2 *SSLExtension) *SSLExtension {
 }
 
 // DeleteBottomN 删除倒数第N个节点 /**
-func (this *SSLExtension) DeleteBottomN(n int) {
-	if n <= 0 || nil == this.Head || nil == this.Head.Next {
+func (ssl *SSLExtension) DeleteBottomN(n int) {
+	if n <= 0 || nil == ssl.Head || nil == ssl.Head.Next {
 		return
 	}
 
-	fast := this.Head
+	fast := ssl.Head
 	for i := 1; i <= n && fast != nil; i++ {
 		fast = fast.Next
 	}
@@ -100,7 +99,7 @@ func (this *SSLExtension) DeleteBottomN(n int) {
 		return
 	}
 
-	slow := this.Head
+	slow := ssl.Head
 	for nil != fast.Next {
 		slow = slow.Next
 		fast = fast.Next
@@ -109,16 +108,16 @@ func (this *SSLExtension) DeleteBottomN(n int) {
 }
 
 // FindMiddleNode 获取中间节点 /**
-func (this *SSLExtension) FindMiddleNode() *list.Node {
-	if nil == this.Head || nil == this.Head.Next {
+func (ssl *SSLExtension) FindMiddleNode() *list.Node {
+	if nil == ssl.Head || nil == ssl.Head.Next {
 		return nil
 	}
 
-	if nil == this.Head.Next.Next {
-		return this.Head.Next
+	if nil == ssl.Head.Next.Next {
+		return ssl.Head.Next
 	}
 
-	slow, fast := this.Head, this.Head
+	slow, fast := ssl.Head, ssl.Head
 	for nil != fast && nil != fast.Next {
 		slow = slow.Next
 		fast = fast.Next.Next
