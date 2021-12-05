@@ -24,16 +24,17 @@ func (s *SSLExtension) Reverse() {
 	cur := s.Head.Next
 	for nil != cur {
 		// 将next设置为curr.next
-		next := cur.Next
+		tmp := cur.Next
 		// 将curr.next设置为curr.prev
 		cur.Next = pre
 		// 将prev和curr的节点依次向后移动一位
 		pre = cur
-		cur = next
+		cur = tmp
 	}
 
 	s.Head.Next = pre
 }
+// 详细见 https://danny-jiang.blog.csdn.net/article/details/84282723
 
 // HasCycle 判断单链表是否有环 /**
 func (ssl *SSLExtension) HasCycle() bool {
