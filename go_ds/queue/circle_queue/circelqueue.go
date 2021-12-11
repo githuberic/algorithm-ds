@@ -1,4 +1,4 @@
-package queue
+package circle_queue
 
 import "fmt"
 
@@ -16,9 +16,7 @@ func NewCircularQueue(n int) *CircularQueue {
 	return &CircularQueue{make([]interface{}, n), n, 0, 0}
 }
 
-/*
-栈空条件：head==tail为true
-*/
+// IsEmpty 栈空条件：head==tail为true /*
 func (this *CircularQueue) IsEmpty() bool {
 	if this.head == this.tail {
 		return true
@@ -26,9 +24,7 @@ func (this *CircularQueue) IsEmpty() bool {
 	return false
 }
 
-/*
-栈满条件：(tail+1)%capacity==head为true
-*/
+// IsFull 栈满条件：(tail+1)%capacity==head为true /*
 func (this *CircularQueue) IsFull() bool {
 	if this.head == (this.tail+1)%this.capacity {
 		return true
@@ -58,9 +54,10 @@ func (this *CircularQueue) String() string {
 	if this.IsEmpty() {
 		return "empty queue"
 	}
+
 	result := "head"
 	var i = this.head
-	for true {
+	for {
 		result += fmt.Sprintf("<-%+v", this.data[i])
 		i = (i + 1) % this.capacity
 		if i == this.tail {

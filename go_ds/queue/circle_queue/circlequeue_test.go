@@ -1,9 +1,9 @@
-package queue
+package circle_queue
 
 import "testing"
 
-func TestArrayQueue_EnQueue(t *testing.T) {
-	q := NewArrayQueue(5)
+func TestCircularQueue_EnQueue(t *testing.T) {
+	q := NewCircularQueue(5)
 	q.EnQueue(1)
 	q.EnQueue(2)
 	q.EnQueue(3)
@@ -13,8 +13,8 @@ func TestArrayQueue_EnQueue(t *testing.T) {
 	t.Log(q)
 }
 
-func TestArrayQueue_DeQueue(t *testing.T) {
-	q := NewArrayQueue(5)
+func TestCircularQueue_DeQueue(t *testing.T) {
+	q := NewCircularQueue(5)
 	q.EnQueue(1)
 	q.EnQueue(2)
 	q.EnQueue(3)
@@ -22,7 +22,9 @@ func TestArrayQueue_DeQueue(t *testing.T) {
 	q.EnQueue(5)
 	q.EnQueue(6)
 	t.Log(q)
-	q.DeQueue()
+	t.Log(q.DeQueue())
+	t.Log(q)
+	q.EnQueue(5)
 	t.Log(q)
 	q.DeQueue()
 	t.Log(q)

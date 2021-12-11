@@ -1,4 +1,4 @@
-package queue
+package v1
 
 import "fmt"
 
@@ -32,13 +32,15 @@ func (this *ArrayQueue) DeQueue() interface{} {
 }
 
 func (this *ArrayQueue) String() string {
-	if this.head == this.tail {
+	if len(this.data) == 0 {
 		return "empty queue"
 	}
+
 	result := "head"
 	for i := this.head; i <= this.tail-1; i++ {
 		result += fmt.Sprintf("<-%+v", this.data[i])
 	}
 	result += "<-tail"
+
 	return result
 }

@@ -1,35 +1,37 @@
-package queue
+package v2
 
 import "fmt"
 
-type ListNode struct {
+type Node struct {
 	val  interface{}
-	next *ListNode
+	next *Node
 }
 
-type LinkedListQueue struct {
-	head   *ListNode
-	tail   *ListNode
+type QueueLink struct {
+	head   *Node
+	tail   *Node
 	length int
 }
 
-func NewLinkedListQueue() *LinkedListQueue {
-	return &LinkedListQueue{nil, nil, 0}
+func NewQueueLink() *QueueLink {
+	return &QueueLink{nil, nil, 0}
 }
 
-func (this *LinkedListQueue) EnQueue(v interface{}) {
-	node := &ListNode{v, nil}
+func (this *QueueLink) EnQueue(v interface{}) bool {
+	node := &Node{v, nil}
 	if this.tail == nil {
-		this.tail = node
 		this.head = node
 	} else {
 		this.tail.next = node
-		this.tail = node
+
 	}
 	this.length++
+	this.tail = node
+
+	return true
 }
 
-func (this *LinkedListQueue) DeQueue() interface{} {
+func (this *QueueLink) DeQueue() interface{} {
 	if this.head == nil {
 		return nil
 	}
@@ -39,7 +41,7 @@ func (this *LinkedListQueue) DeQueue() interface{} {
 	return v
 }
 
-func (this *LinkedListQueue) String() string {
+func (this *QueueLink) String() string {
 	if this.head == nil {
 		return "empty queue"
 	}

@@ -2,17 +2,15 @@ package v2
 
 import "fmt"
 
-/*
-基于链表实现的栈
-*/
-type node struct {
-	next *node
+// Node 基于链表实现的栈 /*
+type Node struct {
+	next *Node
 	val  interface{}
 }
 
 type LinkedListStack struct {
 	//栈顶节点
-	topNode *node
+	topNode *Node
 }
 
 func NewLinkedListStack() *LinkedListStack {
@@ -27,7 +25,7 @@ func (this *LinkedListStack) IsEmpty() bool {
 }
 
 func (this *LinkedListStack) Push(v interface{}) {
-	this.topNode = &node{next: this.topNode, val: v}
+	this.topNode = &Node{next: this.topNode, val: v}
 }
 
 func (this *LinkedListStack) Pop() interface{} {
