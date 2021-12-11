@@ -14,9 +14,11 @@ func adjustHeap(src []Node, start, end int) {
 		if 2*i+1 <= end && src[high].priority < src[2*i+1].priority {
 			high = 2*i + 1
 		}
+
 		if high == i {
 			continue
 		}
+
 		src[high], src[i] = src[i], src[high]
 	}
 }

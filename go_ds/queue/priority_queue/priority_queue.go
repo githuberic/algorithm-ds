@@ -8,8 +8,7 @@ type Node struct {
 
 // PQueue priority queue
 type PQueue struct {
-	heap []Node
-
+	heap     []Node
 	capacity int
 	used     int
 }
@@ -25,7 +24,6 @@ func NewPriorityQueue(capacity int) PQueue {
 
 // Push 入队
 func (q *PQueue) Push(node Node) {
-
 	if q.used > q.capacity {
 		// 队列已满
 		return
@@ -41,6 +39,7 @@ func (q *PQueue) Pop() Node {
 	if q.used == 0 {
 		return Node{-1, -1}
 	}
+
 	// 先堆化, 再取堆顶元素
 	adjustHeap(q.heap, 1, q.used)
 	node := q.heap[1]

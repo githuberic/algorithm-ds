@@ -36,8 +36,8 @@ func Test_PushPop(t *testing.T) {
 	queue.Push(Node{6, 6})
 	queue.Push(Node{12, 5})
 	queue.Push(Node{13, 8})
-	assert.Equal(t, 13, queue.Top().value)
 
+	assert.Equal(t, 13, queue.Top().value)
 	assert.Equal(t, 13, queue.Pop().value)
 	assert.Equal(t, 6, queue.Pop().value)
 	assert.Equal(t, 12, queue.Top().value)
