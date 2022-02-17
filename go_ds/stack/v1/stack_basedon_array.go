@@ -5,6 +5,7 @@ import "fmt"
 type ArrayStack struct {
 	//数据
 	data []interface{}
+
 	//栈顶指针
 	top int
 }
@@ -41,6 +42,7 @@ func (this *ArrayStack) Pop() interface{} {
 	if this.IsEmpty() {
 		return nil
 	}
+
 	v := this.data[this.top]
 	this.top -= 1
 	return v

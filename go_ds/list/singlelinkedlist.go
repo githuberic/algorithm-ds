@@ -6,13 +6,13 @@ import "fmt"
 单链表基本操作
 */
 type Node struct {
-	next  *Node
-	value interface{}
+	Next  *Node
+	Value interface{}
 }
 
 type SingleLinkedList struct {
-	head   *Node
-	length uint
+	Head   *Node
+	Length uint
 }
 
 func NewListNode(v interface{}) *Node {
@@ -20,52 +20,51 @@ func NewListNode(v interface{}) *Node {
 }
 
 func (this *Node) GetNext() *Node {
-	return this.next
+	return this.Next
 }
 
 func (this *Node) GetValue() interface{} {
-	return this.value
+	return this.Value
 }
 
 func NewLinkedList() *SingleLinkedList {
 	return &SingleLinkedList{NewListNode(0), 0}
 }
 
-//在某个节点后面插入节点
-/**
-list: 11-->22-->33
-插入节点22后面
-步骤
-1:取得22.next节点
-2:22.
- */
-func (this *SingleLinkedList) InsertAfter(p *Node, v interface{}) bool {
+// InsertAfter /**
+func (s *SingleLinkedList) InsertAfter(p *Node, v interface{}) bool {
 	if p == nil {
 		return false
 	}
-	newNode := NewListNode(v)
 
-	oldNext := p.next
-	p.next = newNode
-	newNode.next = oldNext
-	this.length++
+	// 构造新节点
+	newNode := NewListNode(v)
+	// 插入位置(p)node的next节点
+	oldNext := p.Next
+	// 插入位置(p).next = 新构造的节点
+	p.Next = newNode
+	// 新构造的节点.next = 插入位置(p)node的next节点
+	newNode.Next = oldNext
+
+	s.Length++
+
 	return true
 }
 
-//在某个节点前面插入节点
-func (this *SingleLinkedList) InsertBefore(p *Node, v interface{}) bool {
-	if nil == p || p == this.head {
+// InsertBefore 在某个节点前面插入节点 /**
+func (s *SingleLinkedList) InsertBefore(p *Node, v interface{}) bool {
+	if nil == p || p == s.Head {
 		return false
 	}
 
-	cur := this.head.next
-	pre := this.head
+	cur := s.Head.Next
+	pre := s.Head
 	for nil != cur {
 		if cur == p {
 			break
 		}
 		pre = cur
-		cur = cur.next
+		cur = cur.Next
 	}
 
 	if nil == cur {
@@ -73,73 +72,77 @@ func (this *SingleLinkedList) InsertBefore(p *Node, v interface{}) bool {
 	}
 
 	newNode := NewListNode(v)
-	pre.next = newNode
-	newNode.next = cur
-	this.length++
+	pre.Next = newNode
+	newNode.Next = cur
+
+	s.Length++
+
 	return true
 }
 
-//在链表头部插入节点
-func (this *SingleLinkedList) InsertToHead(v interface{}) bool {
-	return this.InsertAfter(this.head, v)
+// InsertToHead 在链表头部插入节点 /**
+func (s *SingleLinkedList) InsertToHead(v interface{}) bool {
+	return s.InsertAfter(s.Head, v)
 }
 
-//在链表尾部插入节点
-func (this *SingleLinkedList) InsertToTail(v interface{}) bool {
-	cur := this.head
-	for nil != cur.next {
-		cur = cur.next
+// InsertToTail 在链表尾部插入节点 /**
+func (s *SingleLinkedList) InsertToTail(v interface{}) bool {
+	cur := s.Head
+	for nil != cur.Next {
+		cur = cur.Next
 	}
-	return this.InsertAfter(cur, v)
+	return s.InsertAfter(cur, v)
 }
 
-//通过索引查找节点
-func (this *SingleLinkedList) FindByIndex(index uint) *Node {
-	if index >= this.length {
+// FindByIndex 通过索引查找节点 /**
+func (s *SingleLinkedList) FindByIndex(index uint) *Node {
+	if index >= s.Length {
 		return nil
 	}
 
-	cur := this.head.next
+	cur := s.Head.Next
 	var i uint = 0
 	for ; i < index; i++ {
-		cur = cur.next
+		cur = cur.Next
 	}
+
 	return cur
 }
 
-//删除传入的节点
-func (this *SingleLinkedList) DeleteNode(p *Node) bool {
+// DeleteNode 删除传入的节点 /**
+func (s *SingleLinkedList) DeleteNode(p *Node) bool {
 	if nil == p {
 		return false
 	}
 
-	cur := this.head.next
-	pre := this.head
+	cur := s.Head.Next
+	pre := s.Head
 	for nil != cur {
 		if cur == p {
 			break
 		}
 		pre = cur
-		cur = cur.next
+		cur = cur.Next
 	}
 
 	if nil == cur {
 		return false
 	}
 
-	pre.next = p.next
+	pre.Next = p.Next
 	p = nil
-	this.length--
+	s.Length--
+
 	return true
 }
 
-//打印链表
-func (this *SingleLinkedList) Print() {
-	cur := this.head.next
+// Print /**
+func (s *SingleLinkedList) Print() {
+	cur := s.Head.Next
 	format := ""
 	for nil != cur {
 		format += fmt.Sprintf("%+v", cur.GetValue())
-		cur = cur.next
+		cur = cur.Next
 		if nil != cur {
 			format += "->"
 		}
